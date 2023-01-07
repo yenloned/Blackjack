@@ -1,10 +1,12 @@
 #include <iostream>
 #include "cards.h"
+#include "game.h"
+#include "util.h"
 using namespace std;
 
-void ask_actions(){
+int ask_actions(){
     int choice = 0;
-    bool continue = true;
+    bool is_continue = true;
 
     do{
         cout << "===================================" << endl;
@@ -17,18 +19,25 @@ void ask_actions(){
         cin >> choice;
 
         switch(choice){
+            case 1: is_continue = false; break;
+            case 2: is_continue = false; break;
+            case 3: is_continue = false; break;
+            case 4: is_continue = false; break;
             default:
-                cout << "Invalid Input, please try again"
+                cout << "Invalid Input, please try again." << endl;
         }
-    }while(continue);
+    }while(is_continue);
+
+    return choice;
 }
 
-void ask_bet(){
+int ask_bet(){
     int bet = 0;
 
     cout << "Place your bet: ";
     do{
         cin >> bet;
-        if(bet <= 0) cout << "Invalid Input, please try again"
-    }while(bet <=0)
+        if(bet <= 0) cout << "Invalid Input, please try again." << endl;
+    }while(bet <=0);
+    return bet;
 }
