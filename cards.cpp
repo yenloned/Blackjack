@@ -1,62 +1,117 @@
 #include "cards.h"
+#include "util.h"
 #include <stdlib.h>
 #include <time.h>
-
-const int A = 1;
-const int J = 10;
-const int Q = 10;
-const int K = 10;
+#include <string.h>
 
 Player::Player(){
     for(int i=0; i<11; i++){
-        totalHand[i] = 0;
+        strcpy(totalHand[i],"0");
     }
     balance = 10000;
     totalPoint = 0;
     splittedPoint[26] = {};
 }
 
-int Player::get_totalHand() const { return totalHand[0]; }
+void Player::print_totalHand() const {
+    int i =0;
+    while(strcmp(totalHand[i], "0") != 0){
+        cout << totalHand[i];
+        if(i != 11 && strcmp(totalHand[i+1], "0") != 0){
+            cout << ", ";
+        }
+        i++;
+    }
+    cout << endl;
+}
 
 int Player::get_balance() const { return balance; }
 
 int Player::get_totalPoint() const { return totalPoint; }
 
-//int Player::get_splittedPoint() const { return splittedPoint; }
+//int Player::print_splittedPoint() const { return splittedPoint; }
 
-void Player::draw_hand(int* stack, int& stackSize){
+void Player::draw_hand(char stack[][3], int& stackSize){
     srand(time(NULL));
     int draw_post = (rand() % stackSize);
     //cout << "draw post is " << draw_post << endl;
     
     int temp = 0;
     //cout << "total[0] : " << totalHand[0] << endl;
-    while(totalHand[temp] != 0){
+    while(strcmp(totalHand[temp], "0") != 0){
         temp++;
     }
-    totalHand[temp] = *(stack+draw_post);
+    strcpy(totalHand[temp], stack[draw_post]);
     //cout << "first empty place is " << temp << " getting " << *(stack+draw_post) << endl;
-    totalPoint += totalHand[temp];
+    totalPoint += hand_convert(totalHand[temp], get_totalPoint());
 
     stackSize -= 1;
     
     //delete cardStack's drawn card
     for(int i=draw_post; i < stackSize; i++){
-        stack[i] = stack[i+1];
+        strcpy(stack[i], stack[i+1]);
+        if(i == stackSize-1){
+            strcpy(stack[i],"0");
+        }
     }
 }
 
 
 
 Dealer::Dealer(){
-    totalHand[11] = {};
+    for(int i=0; i<11; i++){
+        strcpy(totalHand[i],"0");
+    }
     totalPoint = 0;
     splittedPoint[26] = {};
 }
 
-//int Dealer::get_totalHand() const { return totalHand; }
+void Dealer::init_print_totalHand() const {
+    cout << totalHand[0] << ", ?" << endl;
+}
+
+void Dealer::print_totalHand() const {
+    int i =0;
+    while(strcmp(totalHand[i], "0") != 0){
+        cout << totalHand[i];
+        if(i != 11 && strcmp(totalHand[i+1], "0") != 0){
+            cout << ", ";
+        }
+        i++;
+    }
+    cout << endl;
+}
+
+void Dealer::init_print_totalPoint(){
+    cout << hand_convert(totalHand[0], get_totalPoint()) << " + ?" << endl;
+}
 
 int Dealer::get_totalPoint() const { return totalPoint; }
 
 //int Dealer::get_splittedPoint() const { return splittedPoint; }
+
+void Dealer::draw_hand(char stack[][3], int& stackSize){
+    srand(time(NULL));
+    int draw_post = (rand() % stackSize);
+    //cout << "draw post is " << draw_post << endl;
+    
+    int temp = 0;
+    //cout << "total[0] : " << totalHand[0] << endl;
+    while(strcmp(totalHand[temp], "0") != 0){
+        temp++;
+    }
+    strcpy(totalHand[temp], stack[draw_post]);
+    //cout << "first empty place is " << temp << " getting " << *(stack+draw_post) << endl;
+    totalPoint += hand_convert(totalHand[temp], get_totalPoint());
+
+    stackSize -= 1;
+    
+    //delete cardStack's drawn card
+    for(int i=draw_post; i < stackSize; i++){
+        strcpy(stack[i], stack[i+1]);
+        if(i == stackSize-1){
+            strcpy(stack[i],"0");
+        }
+    }
+}
 

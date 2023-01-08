@@ -2,6 +2,8 @@
 #include "cards.h"
 #include "game.h"
 #include "util.h"
+#include <stdlib.h>
+#include <string.h>
 using namespace std;
 
 int ask_actions(){
@@ -40,4 +42,50 @@ int ask_bet(){
         if(bet <= 0) cout << "Invalid Input, please try again." << endl;
     }while(bet <=0);
     return bet;
+}
+
+int hand_convert(char hand[], int curPoint){
+    if(strcmp(hand, "A") == 0 && curPoint <= 10){
+        return 11;
+    }
+    if(strcmp(hand, "A") == 0 && curPoint > 10){
+        return 1;
+    }
+    if(strcmp(hand, "2") == 0){
+        return 2;
+    }
+    if(strcmp(hand, "3") == 0){
+        return 3;
+    }
+    if(strcmp(hand, "4") == 0){
+        return 4;
+    }
+    if(strcmp(hand, "5") == 0){
+        return 5;
+    }
+    if(strcmp(hand, "6") == 0){
+        return 6;
+    }
+    if(strcmp(hand, "7") == 0){
+        return 7;
+    }
+    if(strcmp(hand, "8") == 0){
+        return 8;
+    }
+    if(strcmp(hand, "9") == 0){
+        return 9;
+    }
+    if(strcmp(hand, "10") == 0){
+        return 10;
+    }
+    if(strcmp(hand, "J") == 0){
+        return 10;
+    }
+    if(strcmp(hand, "Q") == 0){
+        return 10;
+    }
+    if(strcmp(hand, "K") == 0){
+        return 10;
+    }
+    return 0;
 }

@@ -1,12 +1,16 @@
 #include <iostream>
+#include "game.h"
 #include "cards.h"
+
+
 using namespace std;
 
-int draw(){
-
+void draw(Dealer* dealer, char cardStack[][3], int& stackSize){
+    dealer->draw_hand(cardStack, stackSize);
 }
 
-int spilt(){
-
+void draw(Player* player, char cardStack[][3], int& stackSize){
+    player->draw_hand(cardStack, stackSize);
 }
+
 
