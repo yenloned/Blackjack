@@ -117,5 +117,9 @@ int main(){
         cout << "You lost $" << bet << "." << endl;
     }
 
+    char temp;
+    cout << "Input any keys to quit...";
+    cin >> temp;
+
     return 0;
 }
