@@ -89,3 +89,17 @@ int hand_convert(char hand[], int curPoint){
     }
     return 0;
 }
+
+bool check_BJ(int curPoint){
+    if(curPoint == 21){
+        return true;
+    }
+    return false;
+}
+
+bool check_Busted(int curPoint){
+    if(curPoint > 21){
+        return true;
+    }
+    return false;
+}

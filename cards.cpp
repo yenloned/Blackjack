@@ -8,7 +8,6 @@ Player::Player(){
     for(int i=0; i<11; i++){
         strcpy(totalHand[i],"0");
     }
-    balance = 10000;
     totalPoint = 0;
     splittedPoint[26] = {};
 }
@@ -22,10 +21,7 @@ void Player::print_totalHand() const {
         }
         i++;
     }
-    cout << endl;
 }
-
-int Player::get_balance() const { return balance; }
 
 int Player::get_totalPoint() const { return totalPoint; }
 
@@ -67,7 +63,7 @@ Dealer::Dealer(){
 }
 
 void Dealer::init_print_totalHand() const {
-    cout << totalHand[0] << ", ?" << endl;
+    cout << totalHand[0] << ", ?";
 }
 
 void Dealer::print_totalHand() const {
@@ -79,11 +75,10 @@ void Dealer::print_totalHand() const {
         }
         i++;
     }
-    cout << endl;
 }
 
 void Dealer::init_print_totalPoint(){
-    cout << hand_convert(totalHand[0], get_totalPoint()) << " + ?" << endl;
+    cout << hand_convert(totalHand[0], get_totalPoint()) << " + ?";
 }
 
 int Dealer::get_totalPoint() const { return totalPoint; }

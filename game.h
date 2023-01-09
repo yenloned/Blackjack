@@ -5,6 +5,8 @@ class Game {
     bool started;
     int cardStack[52];
     int bet;
+    bool playerWon;
+    bool draw;
 
     public:
         Game();
@@ -13,4 +15,8 @@ class Game {
         bool isGameStarted() const;
         int getBet() const;
         void gameSwitch();
+        void playerWinning();
+        bool isPlayerWon() const;
+        void gameDraw();
+        bool isGameDraw() const;
 };

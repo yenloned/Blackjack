@@ -1,14 +1,11 @@
 #include "game.h"
 
-const int A = 1;
-const int J = 10;
-const int Q = 10;
-const int K = 10;
-
 Game::Game(){
     cardStack[52] = {};
     bet=0;
     started = false;
+    playerWon = false;
+    draw = false;
 };
 
 void Game::setBet(int b){
@@ -30,3 +27,19 @@ int Game::getBet() const{
 bool Game::isGameStarted() const{
     return started;
 };
+
+void Game::playerWinning(){
+    playerWon = true;
+}
+
+bool Game::isPlayerWon() const{
+    return playerWon;
+}
+
+void Game::gameDraw(){
+    draw = true;
+}
+
+bool Game::isGameDraw() const{
+    return draw;
+}
