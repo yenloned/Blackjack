@@ -12,6 +12,7 @@ class Player {
 
     public:
         Player();
+        Player(char[], int);
         void print_totalHand() const;
         int get_totalPoint() const;
         int get_splittedPoint() const;

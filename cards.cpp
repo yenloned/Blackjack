@@ -12,6 +12,14 @@ Player::Player(){
     
 }
 
+Player::Player(char splitedHand[], int splitedPt){
+    strcpy(totalHand[0], splitedHand);
+    for(int i=1; i<11; i++){
+        strcpy(totalHand[i],"0");
+    }
+    totalPoint = splitedPt;
+}
+
 void Player::print_totalHand() const {
     int i =0;
     while(strcmp(totalHand[i], "0") != 0){

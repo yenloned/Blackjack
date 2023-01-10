@@ -68,6 +68,7 @@ int main(){
             initPrintHands(dealer);
             break;
         case 2:
+
             break;
         case 3:
             draw(player, cardStack, stackSize);
@@ -87,8 +88,8 @@ int main(){
     cout << "Now checking Dealer..." << endl;
     cout << "===================================" << endl;
 
-    bool isDealerBusted = false;
-    bool isDealerBJ = false;
+    bool isDealerBusted = check_Busted(dealer->get_totalPoint());
+    bool isDealerBJ = check_BJ(dealer->get_totalPoint());
     bool revealed = false;
     //normal case
     while(dealer->get_totalPoint() < player->get_totalPoint() && !isPlayerBusted){
@@ -143,6 +144,7 @@ int main(){
     if(!isPlayerBusted && player->get_totalPoint() > dealer->get_totalPoint()) blackjack->playerWinning();
     if(isPlayerBJ && isDealerBJ) blackjack->gameDraw();
     if(isPlayerBusted && isDealerBusted) blackjack->gameDraw();
+    if(player->get_totalPoint() == dealer->get_totalPoint()) blackjack->gameDraw();
 
 
     if(blackjack->isGameDraw()){

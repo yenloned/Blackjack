@@ -1,6 +1,7 @@
 #include <iostream>
 #include "game.h"
 #include "cards.h"
+#include <string.h>
 
 
 using namespace std;
@@ -26,6 +27,11 @@ void draw(Player* player, char cardStack[][3], int& stackSize){
     player->draw_hand(cardStack, stackSize);
     cout << "Player's hands: "; player->print_totalHand();
     cout << " [Points: " << player->get_totalPoint(); cout << "]" << endl;
+}
+
+bool checkCanSplit(char hands[][3]){
+    if(strcmp(hands[0], hands[1]) == 0) return true;
+    return false;
 }
 
 
