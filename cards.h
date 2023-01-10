@@ -12,7 +12,10 @@ class Player {
 
     public:
         Player();
-        Player(char[], int);
+        Player(Player*);
+        void deleteSecHand();
+        const char* getFirstHand() const;
+        const char* getSecHand() const;
         void print_totalHand() const;
         int get_totalPoint() const;
         int get_splittedPoint() const;

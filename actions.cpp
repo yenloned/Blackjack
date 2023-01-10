@@ -1,6 +1,7 @@
 #include <iostream>
 #include "game.h"
 #include "cards.h"
+#include "util.h"
 #include <string.h>
 
 
@@ -29,9 +30,46 @@ void draw(Player* player, char cardStack[][3], int& stackSize){
     cout << " [Points: " << player->get_totalPoint(); cout << "]" << endl;
 }
 
-bool checkCanSplit(char hands[][3]){
-    if(strcmp(hands[0], hands[1]) == 0) return true;
+bool checkCanSplit(const char hands[], const char secHands[]){
+    if(strcmp(hands, secHands) == 0) return true;
     return false;
+}
+
+void split(const char hands[], const char secHands[]){
+
+}
+
+void splitAction(Player* player, Dealer* dealer, char cardStack[][3], int& stackSize, bool& ableToDouble, bool& isPlayerBusted, bool& isPlayerBJ, bool& isPlayedStanded, bool& isPlayerDoubled){
+    int split_choice = ask_actions();
+    switch (split_choice){
+    case 1:
+        draw(player, cardStack, stackSize);
+        //printInitHands
+        cout << "Dealer's hands: "; dealer->init_print_totalHand();
+        cout << " [Points: "; dealer->init_print_totalPoint(); cout << "]" << endl;
+        ableToDouble = false;
+        break;
+    case 2:
+        isPlayedStanded = true;
+        break;
+    case 3:
+        if(ableToDouble){
+            draw(player, cardStack, stackSize);
+            //printInitHands
+            cout << "Dealer's hands: "; dealer->init_print_totalHand();
+            cout << " [Points: "; dealer->init_print_totalPoint(); cout << "]" << endl;
+            isPlayerDoubled = true;
+            break;
+        }else{
+            cout << "Invalid move, unable to double down in non-first round." << endl;
+            break;
+        }
+    case 4:
+        cout << "Invalid move, unable to Split again." << endl;
+        break;
+    }
+    isPlayerBusted = check_Busted(player->get_totalPoint());
+    isPlayerBJ = check_BJ(player->get_totalPoint());
 }
 
 

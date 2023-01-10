@@ -9,15 +9,30 @@ Player::Player(){
         strcpy(totalHand[i],"0");
     }
     totalPoint = 0;
-    
 }
 
-Player::Player(char splitedHand[], int splitedPt){
-    strcpy(totalHand[0], splitedHand);
+Player::Player(Player* player){
+    strcpy(totalHand[0], player->getFirstHand());
     for(int i=1; i<11; i++){
         strcpy(totalHand[i],"0");
     }
-    totalPoint = splitedPt;
+    totalPoint = player->get_totalPoint() / 2;
+}
+
+void Player::deleteSecHand() {
+    strcpy(totalHand[1], "0");
+    if(strcmp(totalHand[0], "A") == 0){
+        totalPoint = 11;
+    }else{
+        totalPoint = totalPoint/2;
+    }
+}
+
+const char* Player::getFirstHand() const {
+    return totalHand[0];
+}
+const char* Player::getSecHand() const {
+    return totalHand[1];
 }
 
 void Player::print_totalHand() const {
