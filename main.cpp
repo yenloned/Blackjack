@@ -102,7 +102,6 @@ int main(){
         }
         draw(dealer, cardStack, stackSize);
         printHands(player);
-        cout << "YO: " << dealer->get_totalPoint() << endl;
         isDealerBusted = check_Busted(dealer->get_totalPoint());
         isDealerBJ = check_BJ(dealer->get_totalPoint());
     }
@@ -115,7 +114,6 @@ int main(){
         revealed = true;
         draw(dealer, cardStack, stackSize);
         printHands(player);
-        cout << "YO2: " << dealer->get_totalPoint() << endl;
         isDealerBusted = check_Busted(dealer->get_totalPoint());
     }
     //player busted (dealer passed 17 already)
