@@ -74,9 +74,9 @@ int main(){
             initPrintHands(dealer);
             break;
         }
-        if(main_choice == 3) break;
         isPlayerBusted = check_Busted(player->get_totalPoint());
         isPlayerBJ = check_BJ(player->get_totalPoint());
+        if(main_choice == 3) break;
     }
     //player result
     if(isPlayerBusted) cout << "Player Blusted." << endl;
@@ -93,11 +93,11 @@ int main(){
     //normal case
     while(dealer->get_totalPoint() < player->get_totalPoint() && !isPlayerBusted){
         if(isDealerBusted){
-            cout << "Dealer Busted.";
+            cout << "Dealer Busted." << endl;
             break;
         }
         if(isDealerBJ){
-            cout << "Dealer Blackjack!";
+            cout << "Dealer Blackjack!" << endl;
             break;
         }
         draw(dealer, cardStack, stackSize);
@@ -107,7 +107,15 @@ int main(){
     }
     //normal case (dealer no need to draw)
     if(dealer->get_totalPoint() > player->get_totalPoint() && !isPlayerBusted){
-        printHands(dealer);
+        if(isDealerBusted){
+            cout << "Dealer Busted." << endl;
+        }
+        else if(isDealerBJ){
+            cout << "Dealer Blackjack!" << endl;
+        }else{
+            printHands(dealer);
+        }
+        
     }
     //player busted (dealer need to pass 17)
     while(dealer->get_totalPoint() < 17 && isPlayerBusted){
@@ -118,7 +126,11 @@ int main(){
     }
     //player busted (dealer passed 17 already)
     if(dealer->get_totalPoint() > 17 && isPlayerBusted && !revealed){
-        printHands(dealer);
+        if(isDealerBusted){
+            cout << "Dealer Busted." << endl;
+        }else{
+            printHands(dealer);
+        }
     }
 
 
