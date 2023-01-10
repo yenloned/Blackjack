@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_CARD_NUM = 52;
+const int MAX_CARD_NUM = 11;
 
-const int SPILTE_NUM = 26;
+const int MAX_SPLITE_NUM = 3;
 
 class Player {
     char totalHand[MAX_CARD_NUM][3];
     int totalPoint;
-    int splittedPoint[SPILTE_NUM];
+    char splittedPoint[MAX_SPLITE_NUM][MAX_CARD_NUM][3];
 
     public:
         Player();
@@ -21,7 +21,7 @@ class Player {
 class Dealer {
     char totalHand[MAX_CARD_NUM][3];
     int totalPoint;
-    int splittedPoint[SPILTE_NUM];
+    char splittedPoint[MAX_SPLITE_NUM][MAX_CARD_NUM][3];
 
     public:
         Dealer();

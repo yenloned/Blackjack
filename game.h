@@ -3,7 +3,6 @@ using namespace std;
 
 class Game {
     bool started;
-    int cardStack[52];
     int bet;
     bool playerWon;
     bool draw;

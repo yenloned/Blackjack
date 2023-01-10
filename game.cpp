@@ -1,7 +1,6 @@
 #include "game.h"
 
 Game::Game(){
-    cardStack[52] = {};
     bet=0;
     started = false;
     playerWon = false;

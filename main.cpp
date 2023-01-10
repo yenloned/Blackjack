@@ -85,7 +85,14 @@ int main(){
     bool isDealerBJ = false;
     //normal case
     while(dealer->get_totalPoint() < player->get_totalPoint() && !isPlayerBusted){
-        if(isDealerBusted || isDealerBJ) break;
+        if(isDealerBusted){
+            cout << "Dealer Busted.";
+            break;
+        }
+        if(isDealerBJ){
+            cout << "Dealer Blackjack!";
+            break;
+        }
         draw(dealer, cardStack, stackSize);
         printHands(player);
         isDealerBusted = check_Busted(dealer->get_totalPoint());
@@ -120,6 +127,13 @@ int main(){
     char temp;
     cout << "Input any keys to quit...";
     cin >> temp;
+
+    blackjack = nullptr;
+    delete blackjack;
+    player = nullptr;
+    delete player;
+    dealer = nullptr;
+    delete dealer;
 
     return 0;
 }
