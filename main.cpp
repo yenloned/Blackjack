@@ -28,6 +28,12 @@ void initPrintHands(Dealer* dealer){
     cout << " [Points: "; dealer->init_print_totalPoint(); cout << "]" << endl;
 }
 
+void gameEnd(){
+    char temp;
+    cout << "Input any keys to quit...";
+    cin >> temp;
+}
+
 
 int main(){
 
@@ -83,6 +89,7 @@ int main(){
 
     bool isDealerBusted = false;
     bool isDealerBJ = false;
+    bool revealed = false;
     //normal case
     while(dealer->get_totalPoint() < player->get_totalPoint() && !isPlayerBusted){
         if(isDealerBusted){
@@ -95,15 +102,27 @@ int main(){
         }
         draw(dealer, cardStack, stackSize);
         printHands(player);
+        cout << "YO: " << dealer->get_totalPoint() << endl;
         isDealerBusted = check_Busted(dealer->get_totalPoint());
         isDealerBJ = check_BJ(dealer->get_totalPoint());
     }
+    //normal case (dealer no need to draw)
+    if(dealer->get_totalPoint() > player->get_totalPoint() && !isPlayerBusted){
+        printHands(dealer);
+    }
     //player busted (dealer need to pass 17)
     while(dealer->get_totalPoint() < 17 && isPlayerBusted){
+        revealed = true;
         draw(dealer, cardStack, stackSize);
         printHands(player);
+        cout << "YO2: " << dealer->get_totalPoint() << endl;
         isDealerBusted = check_Busted(dealer->get_totalPoint());
     }
+    //player busted (dealer passed 17 already)
+    if(dealer->get_totalPoint() > 17 && isPlayerBusted && !revealed){
+        printHands(dealer);
+    }
+
 
     //final result
     cout << "===================================" << endl;
@@ -112,10 +131,13 @@ int main(){
     if(!isPlayerBusted && isDealerBusted) blackjack->playerWinning();
     if(isPlayerBJ && !isDealerBJ) blackjack->playerWinning();
     if(!isPlayerBusted && player->get_totalPoint() > dealer->get_totalPoint()) blackjack->playerWinning();
+    if(isPlayerBJ && isDealerBJ) blackjack->gameDraw();
+    if(isPlayerBusted && isDealerBusted) blackjack->gameDraw();
 
 
     if(blackjack->isGameDraw()){
         cout << "Draw. You got back $" << bet << "." << endl;
+        gameEnd();
         return 0;
     }
     if(blackjack->isPlayerWon()){
@@ -124,9 +146,7 @@ int main(){
         cout << "You lost $" << bet << "." << endl;
     }
 
-    char temp;
-    cout << "Input any keys to quit...";
-    cin >> temp;
+    gameEnd();
 
     blackjack = nullptr;
     delete blackjack;
