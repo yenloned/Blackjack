@@ -152,6 +152,7 @@ int main(){
             if(ableToDouble){
                 draw(player, cardStack, stackSize);
                 initPrintHands(dealer);
+                bet *= 2;
                 ableToSplit = false;
                 break;
             }else{
